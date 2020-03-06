@@ -1,36 +1,64 @@
-import 'package:flutter/material.dart';
-import 'package:heatlhore/models/mood.dart';
-import 'package:heatlhore/pages/moodlist.dart';
-import 'package:heatlhore/services/auth.dart';
-import 'package:heatlhore/services/database.dart';
-import 'package:provider/provider.dart';
+// import 'package:charts_flutter/flutter.dart' as charts;
+// import 'package:flutter/material.dart';
 
+// class SimpleTimeSeriesChart extends StatelessWidget {
+//   final List<charts.Series> seriesList;
+//   final Function(DateTime) onItemClicked;
 
-class Home1 extends StatelessWidget {
-  final AuthService _auth = AuthService();
-  @override
-  Widget build(BuildContext context) {
-    return StreamProvider<List<Mood>>.value(
-      value: DatabaseService().moods,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Healthore'),
-          elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: Icon(Icons.people),
-              label: Text('Log Out'),
-            ),
-          ],
-        ),
-        body: Container(
-          
-          child: MoodList(),
-        ),
-      ),
-    );
-  }
-}
+//   SimpleTimeSeriesChart(this.seriesList, this.onItemClicked);
+
+//   factory SimpleTimeSeriesChart.withTransactionData(
+//       List<Transaction> transactions, Function(DateTime) onItemClicked) {
+//     var runningTotal = 0;
+
+//     List<TimeSeriesSimple> mapped = transactions.map((item) {
+//       runningTotal += int.parse(item.amount);
+//       return TimeSeriesSimple(time: item.date, sales: runningTotal);
+//     }).toList();
+
+//     List<charts.Series<TimeSeriesSimple, DateTime>> list = [
+//       charts.Series<TimeSeriesSimple, DateTime>(
+//         id: 'Balance',
+//         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+//         domainFn: (TimeSeriesSimple sales, _) => sales.time,
+//         measureFn: (TimeSeriesSimple sales, _) => sales.sales,
+//         data: mapped,
+//       )
+//     ];
+
+//     return SimpleTimeSeriesChart(list, onItemClicked);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: <Widget>[
+//         SizedBox(
+//           height: MediaQuery.of(context).size.height * 0.3,
+//           child: charts.TimeSeriesChart(
+//             seriesList,
+//             animationDuration: Duration(seconds: 2),
+//             dateTimeFactory: const charts.LocalDateTimeFactory(),
+//             animate: true,
+//             selectionModels: [
+//               charts.SelectionModelConfig(
+//                   type: charts.SelectionModelType.info,
+//                   changedListener: _onSelectionChanged)
+//             ],
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+
+//   _onSelectionChanged(charts.SelectionModel<DateTime> model) {
+//     onItemClicked(model.selectedDatum.first.datum.time);
+//   }
+// }
+
+// class TimeSeriesSimple {
+//   final DateTime time;
+//   final int sales;
+
+//   TimeSeriesSimple({this.time, this.sales});
+// }

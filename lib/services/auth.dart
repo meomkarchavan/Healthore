@@ -34,13 +34,13 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      //       var mood=Mood(dateT: DateTime.now().toString(),mood: "pata nhi").toJson();
-      // var mood2=Mood(dateT: DateTime.now().toString(),mood: "idk").toJson();
+            var mood=Mood(dateT: DateTime.now().toString(),mood: "pata nhi").toJson();
+      var mood2=Mood(dateT: DateTime.now().toString(),mood: "idk").toJson();
 
-      // var moodList=[mood,mood2];
+      var moodList=[mood,mood2];
 
-      //       await DatabaseService(uid: user.uid)
-      //     .appendUserData(moodList);
+            await DatabaseService(uid: user.uid)
+          .appendUserData(moodList);
 
       return _userFromFireBaseUser(user);
     } catch (e) {
@@ -59,12 +59,8 @@ class AuthService {
       var mood2=Mood(dateT: DateTime.now().toString(),mood: "sad").toJson();
 
       var moodList=[mood,mood2];
-      // print(moodList);
-      // print(DateTime.now());
       await DatabaseService(uid: user.uid)
           .updateUserData(moodList);
-      // await DatabaseService(uid: user.uid)
-      //     .appendUserData(moodList);
       
       return _userFromFireBaseUser(user);
     } catch (e) {

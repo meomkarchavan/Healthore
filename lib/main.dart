@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:heatlhore/models/mood.dart';
-import 'package:heatlhore/models/user.dart';
-import 'package:heatlhore/pages/temp.dart';
 import 'package:heatlhore/services/auth.dart';
 import 'package:heatlhore/wrapper.dart';
 import 'package:provider/provider.dart';

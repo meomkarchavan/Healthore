@@ -8,12 +8,32 @@ class DatabaseService {
   //collection reference
   final CollectionReference moodCollection =
       Firestore.instance.collection('mood1');
+  final CollectionReference postCollection =
+      Firestore.instance.collection('post1');
+  // Future addPost(Map<String, dynamic> post) async {
+
+  //   print(post['message']);
+  //   return await postCollection.document(uid).setData({
+  //     'message': post['message'],
+  //     'userid': post['userid'],
+  //     'dateTime': post['dateTime'],
+  //     'category': post['category'],
+  //     'tags': post['tags']
+  //   });
+  // }
+  Future addPost(Map<String, dynamic> post) async {
+var data={'message': post['message'],
+      'userid': post['userid'],
+      'dateTime': post['dateTime'],
+      'category': post['category'],
+      'tags': post['tags']};
+
+    return await moodCollection.document(uid).setData({'Posts': [data]});
+  
+  }
 
   Future updateUserData(List<Map<String, dynamic>> moodList) async {
-    // print(moodList);
-    return await moodCollection
-        .document(uid)
-        .setData({'moodlist': FieldValue.arrayUnion(moodList)});
+    return await moodCollection.document(uid).setData({'moodlist': moodList});
   }
 
   Future appendUserData(List<Map<String, dynamic>> moodList) async {
@@ -37,12 +57,10 @@ class DatabaseService {
       for (var i = 0; i < doc.data['moodlist'].length; i++) {
         llist.add(doc.data['moodlist'][i]);
       }
-
     });
-        return llist.map((item){
-        return Mood(mood: item['mood'],dateT: item['dateT']);
-        }).toList();
-
+    return llist.map((item) {
+      return Mood(mood: item['mood'], dateT: item['dateT']);
+    }).toList();
   }
 
   //get moods stream

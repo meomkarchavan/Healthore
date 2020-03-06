@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:heatlhore/pages/moodlist.dart';
+import 'package:heatlhore/services/quotes.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: MoodList()),
+    return Flex(
+      direction: Axis.vertical,
+      children: <Widget>[
+        Expanded(child: QuoteList())
+      ],
     );
   }
 }
