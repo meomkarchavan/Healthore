@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heatlhore/pages/signINpage.dart';
+import 'package:heatlhore/wrapper.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.pink,
       ),
       // home: MyHomePage(title: 'Healthore'),
-      home: SignInPage(),
+      home: Wrapper(),
     );
   }
 }
