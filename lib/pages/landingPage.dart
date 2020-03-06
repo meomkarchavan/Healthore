@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:heatlhore/pages/homePage.dart';
-import 'package:heatlhore/pages/signINpage.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -12,7 +11,7 @@ class LandingPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           FirebaseUser user = snapshot.data;
           if (user == null) {
-            return SignInPage();
+            return Text('helo');
           }
           return HomePage();
         } else {
