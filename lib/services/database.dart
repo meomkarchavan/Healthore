@@ -9,22 +9,17 @@ class DatabaseService {
   final CollectionReference moodCollection =
       Firestore.instance.collection('mood1');
 
-  Future updateUserData(List<Map<String,dynamic>> moodList) async {
-    print("here");
-    print(moodList);
+  Future updateUserData(List<Map<String, dynamic>> moodList) async {
+    // print(moodList);
     return await moodCollection
         .document(uid)
         .setData({'moodlist': FieldValue.arrayUnion(moodList)});
-        
   }
 
-  Future appendUserData(List<Map<String,dynamic>> moodList) async {
-    print("here");
-    print(moodList);
+  Future appendUserData(List<Map<String, dynamic>> moodList) async {
     return await moodCollection
         .document(uid)
         .updateData({'moodlist': FieldValue.arrayUnion(moodList)});
-        
   }
 
   //get userdata from snapshot
@@ -37,12 +32,19 @@ class DatabaseService {
 
 //brew list from snapshot
   List<Mood> _moodListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      return Mood(
-          mood: doc.data['mood'] ?? '',
-          dateT: doc.data['dateT'] ?? '');
-    }).toList();
+    var llist = [];
+    snapshot.documents.forEach((doc) {
+      for (var i = 0; i < doc.data['moodlist'].length; i++) {
+        llist.add(doc.data['moodlist'][i]);
+      }
+
+    });
+        return llist.map((item){
+        return Mood(mood: item['mood'],dateT: item['dateT']);
+        }).toList();
+
   }
+
   //get moods stream
   Stream<List<Mood>> get moods {
     return moodCollection.snapshots().map(_moodListFromSnapshot);

@@ -10,14 +10,11 @@ class Home1 extends StatelessWidget {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    
     return StreamProvider<List<Mood>>.value(
       value: DatabaseService().moods,
       child: Scaffold(
-        backgroundColor: Colors.brown[200],
         appBar: AppBar(
-          backgroundColor: Colors.brown[400],
-          title: Text('Brew Crew'),
+          title: Text('Healthore'),
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(
@@ -30,12 +27,7 @@ class Home1 extends StatelessWidget {
           ],
         ),
         body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/coffee_bg.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
+          
           child: MoodList(),
         ),
       ),

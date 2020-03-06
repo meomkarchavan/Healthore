@@ -6,6 +6,8 @@ class MoodTile extends StatelessWidget {
   MoodTile({this.mood});
   @override
   Widget build(BuildContext context) {
+      print(mood.toJson());
+
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
