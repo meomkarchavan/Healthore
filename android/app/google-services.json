@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "433077973822",
+    "firebase_url": "https://healthore-91f80.firebaseio.com",
+    "project_id": "healthore-91f80",
+    "storage_bucket": "healthore-91f80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433077973822:android:345417ee320374c87bf26f",
+        "android_client_info": {
+          "package_name": "com.error404.healthore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433077973822-9u80nu82i670r2etad7simtqtu5mdkgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2UuYOrungXRWWttSrNpA4k8Sl2Jm5oT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433077973822-9u80nu82i670r2etad7simtqtu5mdkgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
