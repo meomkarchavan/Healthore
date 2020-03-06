@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:heatlhore/models/mood.dart';
 import 'package:heatlhore/models/user.dart';
 import 'package:heatlhore/services/database.dart';
 
@@ -47,8 +48,10 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+      List<Mood> mood=[];
+      print(DateTime.now());
       await DatabaseService(uid: user.uid)
-          .updateUserData('0', 'new crew member', 100);
+          .updateUserData(mood,DateTime.now().toString());
       return _userFromFireBaseUser(user);
     } catch (e) {
       print('Error: $e');

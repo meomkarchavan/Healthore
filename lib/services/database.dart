@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:heatlhore/models/mood.dart';
 import 'package:heatlhore/models/user.dart';
 
 class DatabaseService {
@@ -6,12 +7,12 @@ class DatabaseService {
   DatabaseService({this.uid});
   //collection reference
   final CollectionReference brewCollection =
-      Firestore.instance.collection('brews');
+      Firestore.instance.collection('mood');
 
-  Future updateUserData(String sugars, String name, int strength) async {
+  Future updateUserData(List<Mood> moodList,String dateT) async {
     return await brewCollection
         .document(uid)
-        .setData({'sugars': sugars, 'name': name, 'strength': strength});
+        .setData({'moodlist': moodList,'dateT':dateT});
   }
 
 
@@ -19,9 +20,8 @@ class DatabaseService {
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
-      name: snapshot.data['name'],
-      strength: snapshot.data['strength'],
-      sugars: snapshot.data['sugars'],
+      moodList: snapshot.data['moodList'],
+      dateT:snapshot.data['dateT'],
     );
   }
 
