@@ -1,6 +1,14 @@
 class Mood{
 final String mood;
-final DateTime date;
-  Mood({this.mood, this.date});
+final String dateT;
+  Mood({this.mood, this.dateT});
+  Mood.fromJson(Map<String, dynamic> json)
+      : mood = json['mood'],
+        dateT = json['dateT'];
 
+  Map<String, dynamic> toJson() =>
+    {
+      'mood': mood,
+      'dateT': dateT,
+    };
 }

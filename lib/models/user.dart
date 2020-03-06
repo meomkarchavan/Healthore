@@ -8,6 +8,12 @@ class User {
 class UserData {
 final String uid;
 final List<Mood> moodList;
-final String dateT;
-  UserData({this.moodList,this.uid,this.dateT});
+  UserData({this.moodList,this.uid});
+   UserData.fromJson(Map<String, dynamic> json)
+      : moodList = json['moodList'],
+      uid=json['uid'];
+
+  Map<String, List<Mood>> toJson() =>
+    {'moodLIst':moodList,
+    };
 }
