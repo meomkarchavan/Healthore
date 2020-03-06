@@ -48,7 +48,7 @@ void _onItemTapped(int index) {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: _widgetOptions[_selectedIndex],
+      body: SafeArea(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
