@@ -12,7 +12,7 @@ class DatabaseService {
   final CollectionReference postCollection =
       Firestore.instance.collection('post1');
 
-  Future addPost(Map<String, dynamic> post) async {
+  Future updatePost(Map<String, dynamic> post) async {
 var data={'message': post['message'],
       'userid': post['userid'],
       'dateTime': post['dateTime'],
@@ -22,7 +22,7 @@ var data={'message': post['message'],
     return await postCollection.document(uid).updateData({'Posts': FieldValue.arrayUnion([data])});
   
   }
-   Future updatePost(Map<String, dynamic> post) async {
+   Future addPost(Map<String, dynamic> post) async {
 var data={'message': post['message'],
       'userid': post['userid'],
       'dateTime': post['dateTime'],

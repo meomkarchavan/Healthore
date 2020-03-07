@@ -110,7 +110,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   userid: user.uid,
                   category: _categoriesResult.cast<String>(),
                   tags: tags).toJson();
-              await DatabaseService(uid: user.uid).addPost(data);
+              await DatabaseService(uid: user.uid).updatePost(data);
               // print(data);
             })
           ],

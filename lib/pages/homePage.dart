@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heatlhore/models/mood.dart';
+import 'package:heatlhore/models/user.dart';
 import 'package:heatlhore/screens/Home/Home.dart';
 import 'package:heatlhore/screens/Home/Profile.dart';
 import 'package:heatlhore/screens/Home/addPost.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   int _selectedIndex = 0;
 static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
  List<Widget> _widgetOptions = <Widget>[
@@ -33,6 +35,8 @@ void _onItemTapped(int index) {
 
   @override
   Widget build(BuildContext context) {
+          final user = Provider.of<User>(context);
+
       final AuthService _auth = AuthService();
 
     return StreamProvider<List<Mood>>.value(
