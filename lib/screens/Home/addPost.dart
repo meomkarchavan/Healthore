@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heatlhore/models/Post.dart';
 import 'package:heatlhore/models/user.dart';
 import 'package:heatlhore/services/database.dart';
+import 'package:heatlhore/shared/constant.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:provider/provider.dart';
 
@@ -70,49 +71,88 @@ class _MyCustomFormState extends State<MyCustomForm> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            Text(
+                      'Enter Message',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
             TextField(
-              //MEssage Field
-              controller: messageController,
+                //MEssage Field
+                maxLines: 4,
+                controller: messageController,
+                decoration:
+                    textInputDecoration.copyWith(hintText: 'Write A Message')),
+            SizedBox(
+              height: 20,
             ),
+            Text(
+                      'Enter Hastags with "#"',
+                      style: TextStyle(
+                        color: Colors.white54,
+                        fontSize: 20.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
             TextField(
-              //Tags Field
-              controller: tagsController,
+                //Tags Field
+                controller: tagsController,
+                decoration:
+                    textInputDecoration.copyWith(hintText: 'Write A Message')),
+            SizedBox(
+              height: 20,
             ),
+            Text(
+                      'Select Categories',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
             MultiSelectFormField(
               autovalidate: false,
               titleText: 'Categories',
-              // validator: (value) {
-              //   if (value == null || value.length == 0) {
-              //     return 'Please select one or more options';
-              //   }
-              // },
+
               dataSource: categorys,
-                textField: 'display',
-                  valueField: 'value',
-                  okButtonLabel: 'OK',
-                  cancelButtonLabel: 'CANCEL',
-                  // required: true,
-                  hintText: 'Please choose one or more',
-                  value: _categories,
-                  onSaved: (value) {
-                    if (value == null) return;
-                    setState(() {
-                      print(value.runtimeType);
-                      _categories = value;
-                    });
-                  },
-                
+              textField: 'display',
+              valueField: 'value',
+              okButtonLabel: 'OK',
+              cancelButtonLabel: 'CANCEL',
+              // required: true,
+              hintText: 'Please choose one or more',
+              value: _categories,
+              onSaved: (value) {
+                if (value == null) return;
+                setState(() {
+                  print(value.runtimeType);
+                  _categories = value;
+                });
+              },
             ),
-            RaisedButton(onPressed: () async {
-              var data = Post(
-                  dateTime: DateTime.now().toString(),
-                  message: message,
-                  userid: user.uid,
-                  category: _categoriesResult.cast<String>(),
-                  tags: tags).toJson();
-              await DatabaseService(uid: user.uid).updatePost(data);
-              // print(data);
-            })
+            SizedBox(height:20),
+            
+            RaisedButton(
+                child: Text(
+                  "POST NOW",
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () async {
+                  var data = Post(
+                          dateTime: DateTime.now().toString(),
+                          message: message,
+                          userid: user.uid,
+                          category: _categoriesResult.cast<String>(),
+                          tags: tags)
+                      .toJson();
+                  await DatabaseService(uid: user.uid).updatePost(data);
+                  // print(data);
+                })
           ],
         ),
       ),

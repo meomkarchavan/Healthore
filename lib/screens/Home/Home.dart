@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heatlhore/models/Post.dart';
-import 'package:heatlhore/pages/moodlist.dart';
-import 'package:heatlhore/screens/Home/postList.dart';
-import 'package:heatlhore/services/audioPlayer.dart';
-import 'package:heatlhore/services/quotes.dart';
-import 'package:provider/provider.dart';
+import 'package:heatlhore/pages/temp.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -13,7 +8,8 @@ class Home extends StatelessWidget {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
-        Expanded(child: QuoteList()),
+        Expanded(child: MainPage())
+        // Expanded(child: QuoteList()),
         // Expanded(child: MoodList(),)
         // Expanded(child: LocalAudio())
       ],

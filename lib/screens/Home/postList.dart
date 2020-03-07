@@ -9,7 +9,7 @@ class PostList extends StatefulWidget {
 }
 
 class _PostListState extends State<PostList> {
-  var data=DatabaseService().posts;
+  // var data=DatabaseService().posts;
   @override
   Widget build(BuildContext context) {
     return Container(

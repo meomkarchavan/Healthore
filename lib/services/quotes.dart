@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:math';
 
 class QuoteList extends StatelessWidget {
   const QuoteList({
@@ -17,10 +18,40 @@ class QuoteList extends StatelessWidget {
               ? ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, position) {
-                    return ListTile(
-                        title: Text(snapshot.data[position]['text']));
-                  },
-                )
+                    return Container(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      height: 220,
+                      width: double.maxFinite,
+                      child: Card(
+                        elevation: 5,
+                        color: Colors.primaries[
+                            Random().nextInt(Colors.primaries.length)],
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                snapshot.data[position]['text'],
+                                style: TextStyle(fontSize: 20),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "~" + snapshot.data[position]['author'],
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                  // },
+                  )
               : Center(child: CircularProgressIndicator());
         });
   }

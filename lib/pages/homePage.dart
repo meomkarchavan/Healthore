@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heatlhore/models/mood.dart';
-import 'package:heatlhore/models/user.dart';
 import 'package:heatlhore/screens/Home/Home.dart';
 import 'package:heatlhore/screens/Home/Profile.dart';
 import 'package:heatlhore/screens/Home/addPost.dart';
@@ -35,13 +34,13 @@ void _onItemTapped(int index) {
 
   @override
   Widget build(BuildContext context) {
-          final user = Provider.of<User>(context);
 
       final AuthService _auth = AuthService();
 
     return StreamProvider<List<Mood>>.value(
       value:DatabaseService().moods,
           child: Scaffold(
+            resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text(widget.title),
         actions: <Widget>[

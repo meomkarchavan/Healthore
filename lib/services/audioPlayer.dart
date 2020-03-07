@@ -62,7 +62,7 @@ class _LocalAudio extends State<LocalAudio> {
             icon:Icon(txt=="play"?Icons.play_circle_filled:txt=="pause"?Icons.pause_circle_filled:Icons.stop),
           iconSize: 50,
           onPressed: onPressed,
-            color: Colors.lightBlue,
+            color: Colors.cyan,
           ),
         ),
       ),
@@ -89,10 +89,8 @@ class _LocalAudio extends State<LocalAudio> {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 1.0,
-            backgroundColor: Colors.teal,
             title: Center(child: Text('CALM WHITE AUDIO')),
           ),
           body: ListView.builder(
@@ -101,7 +99,10 @@ class _LocalAudio extends State<LocalAudio> {
                 return Flex(
                   direction: Axis.horizontal,
                   children: <Widget>[
-                    Text(music1[index]),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(music1[index],style: TextStyle(fontSize: 20),),
+                    ),
                     _btn('play', () => audioCache.play(music[index])),
                     _btn('pause', () => advancedPlayer.pause()),
                     _btn('stop', () => advancedPlayer.stop()),

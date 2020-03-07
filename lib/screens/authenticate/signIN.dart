@@ -43,12 +43,21 @@ class _SignInState extends State<SignIn> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+                    Text(
+                      'Sign In',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                     SizedBox(
                       height: 20.0,
                     ),
                     TextFormField(
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'Email'),
+                          textInputDecoration.copyWith(hintText: 'Email',fillColor: Colors.black),
                       validator: (val) => val.isEmpty ? 'Enter Email' : null,
                       onChanged: (val) {
                         //function
@@ -60,7 +69,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     TextFormField(
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'Password'),
+                          textInputDecoration.copyWith(hintText: 'Password',fillColor: Colors.black),
                       validator: (val) =>
                           val.length < 6 ? 'Enter pass more han 6 chars' : null,
                       obscureText: true,

@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:heatlhore/models/Post.dart';
 import 'package:heatlhore/models/mood.dart';
-import 'package:heatlhore/models/user.dart';
 
 class DatabaseService {
   final String uid;
@@ -44,15 +42,12 @@ var data={'message': post['message'],
   }
 
   //get userdata from snapshot
-  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return UserData(
-      uid: uid,
-      moodList: snapshot.data['moodList'],
-    );
-  }
-UserData _postFromSnapshot(DocumentSnapshot snapshot) {
-    return snapshot.data['Posts'];
-  }
+  // UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+  //   return UserData(
+  //     uid: uid,
+  //     moodList: snapshot.data['moodList'],
+  //   );
+  // }
 //brew list from snapshot
   List<Mood> _moodListFromSnapshot(QuerySnapshot snapshot) {
     var llist = [];
@@ -65,30 +60,32 @@ UserData _postFromSnapshot(DocumentSnapshot snapshot) {
       return Mood(mood: item['mood'], dateT: item['dateT']);
     }).toList();
   }
-  List<Post> _postListFromSnapshot(QuerySnapshot snapshot) {
-    var llist = [];
-    snapshot.documents.forEach((doc) {
-      print(doc);
-    });
-    // snapshot.documents.forEach((doc) {
-    //   for (var i = 0; i < doc.data['moodlist'].length; i++) {
-    //     llist.add(doc.data['moodlist'][i]);
-    //   }
-    // });
-    // return llist.map((item) {
-    //   return Mood(mood: item['mood'], dateT: item['dateT']);
-    // }).toList();
-  }
-  //get moods stream
+  // TODO
+  // List<Post> _postListFromSnapshot(QuerySnapshot snapshot) {
+  //   var llist = [];
+  //   snapshot.documents.forEach((doc) {
+  //     print(doc);
+  //   });
+  //   snapshot.documents.forEach((doc) {
+  //     for (var i = 0; i < doc.data['moodlist'].length; i++) {
+  //       llist.add(doc.data['moodlist'][i]);
+  //     }
+  //   });
+  //   return llist.map((item) {
+  //     return Mood(mood: item['mood'], dateT: item['dateT']);
+  //   }).toList();
+  // }
+  // get moods stream
   Stream<List<Mood>> get moods {
     return moodCollection.snapshots().map(_moodListFromSnapshot);
   }
-   Stream<List<Post>> get posts {
-    return postCollection.snapshots().map(_postListFromSnapshot);
-  }
+//    Stream<List<Post>> get posts {
+//     return postCollection.snapshots().map(_postListFromSnapshot);
+//   }
 
-  //get user doc stream
-  Stream<UserData> get userData {
-    return moodCollection.document(uid).snapshots().map(_userDataFromSnapshot);
-  }
+//   //get user doc stream
+//   Stream<UserData> get userData {
+//     return moodCollection.document(uid).snapshots().map(_userDataFromSnapshot);
+//   }
+// }
 }

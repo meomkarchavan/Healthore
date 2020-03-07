@@ -14,7 +14,7 @@ class MoodChart extends StatelessWidget {
         id: "Subscribers",
         data: data,
         // domainFn: (Mood series, _) =>
-            // DateTime.parse(series.dateT).toUtc().hour.toString(),
+            // DateTime.parse(series.dateT).toUtc().weekday.toString(),
         domainFn: (Mood series, _) => series.dateT,
 
         // domainFn: (Mood series,_)=> series.mood,
