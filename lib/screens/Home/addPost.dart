@@ -52,7 +52,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
   }
 
   _saveForm() {
-    var form = formKey.currentState;
+    // var form = formKey.currentState;
     setState(() {
       _categoriesResult = _categories;
       tags = tagsController.text.split("#");
@@ -81,11 +81,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
             MultiSelectFormField(
               autovalidate: false,
               titleText: 'Categories',
-              validator: (value) {
-                if (value == null || value.length == 0) {
-                  return 'Please select one or more options';
-                }
-              },
+              // validator: (value) {
+              //   if (value == null || value.length == 0) {
+              //     return 'Please select one or more options';
+              //   }
+              // },
               dataSource: categorys,
                 textField: 'display',
                   valueField: 'value',

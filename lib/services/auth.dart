@@ -34,13 +34,13 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-            var mood=Mood(dateT: DateTime.now().toString(),mood: "pata nhi").toJson();
-      var mood2=Mood(dateT: DateTime.now().toString(),mood: "idk").toJson();
+      var mood =
+          Mood(dateT: DateTime.now().toString(), mood: "pata nhi").toJson();
+      var mood2 = Mood(dateT: DateTime.now().toString(), mood: "idk").toJson();
 
-      var moodList=[mood,mood2];
+      var moodList = [mood, mood2];
 
-            await DatabaseService(uid: user.uid)
-          .appendUserData(moodList);
+      await DatabaseService(uid: user.uid).appendUserData(moodList);
 
       return _userFromFireBaseUser(user);
     } catch (e) {
@@ -55,13 +55,21 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      var mood=Mood(dateT: DateTime.now().toString(),mood: "happy").toJson();
-      var mood2=Mood(dateT: DateTime.now().toString(),mood: "sad").toJson();
+      var mood = Mood(dateT: DateTime.now().toString(), mood: "happy").toJson();
+      var mood2 = Mood(dateT: DateTime.now().toString(), mood: "sad").toJson();
 
-      var moodList=[mood,mood2];
-      await DatabaseService(uid: user.uid)
-          .updateUserData(moodList);
-      
+      var moodList = [mood, mood2];
+      await DatabaseService(uid: user.uid).updateUserData(moodList);
+
+      var data = {
+        'message': "",
+        'userid': user.uid,
+        'dateTime': DateTime.now(),
+        'category': [],
+        'tags': []
+      };
+      await DatabaseService(uid: user.uid).addPost(data);
+
       return _userFromFireBaseUser(user);
     } catch (e) {
       print('Error: $e');

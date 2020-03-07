@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:heatlhore/models/Post.dart';
 import 'package:heatlhore/models/mood.dart';
 import 'package:heatlhore/models/user.dart';
 
@@ -10,17 +11,7 @@ class DatabaseService {
       Firestore.instance.collection('mood1');
   final CollectionReference postCollection =
       Firestore.instance.collection('post1');
-  // Future addPost(Map<String, dynamic> post) async {
 
-  //   print(post['message']);
-  //   return await postCollection.document(uid).setData({
-  //     'message': post['message'],
-  //     'userid': post['userid'],
-  //     'dateTime': post['dateTime'],
-  //     'category': post['category'],
-  //     'tags': post['tags']
-  //   });
-  // }
   Future addPost(Map<String, dynamic> post) async {
 var data={'message': post['message'],
       'userid': post['userid'],
@@ -28,7 +19,17 @@ var data={'message': post['message'],
       'category': post['category'],
       'tags': post['tags']};
 
-    return await moodCollection.document(uid).setData({'Posts': [data]});
+    return await postCollection.document(uid).updateData({'Posts': FieldValue.arrayUnion([data])});
+  
+  }
+   Future updatePost(Map<String, dynamic> post) async {
+var data={'message': post['message'],
+      'userid': post['userid'],
+      'dateTime': post['dateTime'],
+      'category': post['category'],
+      'tags': post['tags']};
+
+    return await postCollection.document(uid).setData({'Posts': [data]});
   
   }
 
@@ -49,7 +50,9 @@ var data={'message': post['message'],
       moodList: snapshot.data['moodList'],
     );
   }
-
+UserData _postFromSnapshot(DocumentSnapshot snapshot) {
+    return snapshot.data['Posts'];
+  }
 //brew list from snapshot
   List<Mood> _moodListFromSnapshot(QuerySnapshot snapshot) {
     var llist = [];
@@ -62,10 +65,26 @@ var data={'message': post['message'],
       return Mood(mood: item['mood'], dateT: item['dateT']);
     }).toList();
   }
-
+  List<Post> _postListFromSnapshot(QuerySnapshot snapshot) {
+    var llist = [];
+    snapshot.documents.forEach((doc) {
+      print(doc);
+    });
+    // snapshot.documents.forEach((doc) {
+    //   for (var i = 0; i < doc.data['moodlist'].length; i++) {
+    //     llist.add(doc.data['moodlist'][i]);
+    //   }
+    // });
+    // return llist.map((item) {
+    //   return Mood(mood: item['mood'], dateT: item['dateT']);
+    // }).toList();
+  }
   //get moods stream
   Stream<List<Mood>> get moods {
     return moodCollection.snapshots().map(_moodListFromSnapshot);
+  }
+   Stream<List<Post>> get posts {
+    return postCollection.snapshots().map(_postListFromSnapshot);
   }
 
   //get user doc stream
